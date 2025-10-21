@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FancyDoge - 多视频分屏播放器</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .ad-container {
+            width: 728px;
+            height: 90px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .ad-content {
+            text-align: center;
+            color: #666;
+        }
+        .adsbygoogle {
+            border-radius: 4px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        <div class="ad-content" id="fallback-content">
+            <h3>多视频分屏播放器</h3>
+            <p>支持开发者 - 广告加载中...</p>
+        </div>
+        <!-- AdSense广告将在这里显示 -->
+        <ins class="adsbygoogle"
+             style="display:block; display:none;"
+             data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+             data-ad-slot="xxxxxxxxxx"
+             data-ad-format="auto"
+             data-full-width-responsive="true"
+             id="ad-unit"></ins>
+    </div>
+
+    <script>
+        // AdSense广告加载
+        function loadAdSense() {
+            const adScript = document.createElement('script');
+            adScript.async = true;
+            adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx';
+            adScript.crossOrigin = 'anonymous';
+            adScript.onload = () => {
+                // 隐藏备用内容，显示广告
+                document.getElementById('fallback-content').style.display = 'none';
+                document.getElementById('ad-unit').style.display = 'block';
+                
+                // 推送广告
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            };
+            adScript.onerror = () => {
+                // 广告加载失败，显示永久备用内容
+                document.getElementById('fallback-content').innerHTML = `
+                    <h3>🎬 多视频分屏播放器</h3>
+                    <p>由 FancyDoge 开发</p>
+                    <small>支持更多精彩功能</small>
+                `;
+            };
+            
+            document.head.appendChild(adScript);
+        }
+
+        // 页面加载后启动广告
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadAdSense);
+        } else {
+            loadAdSense();
+        }
+    </script>
+</body>
+</html>
